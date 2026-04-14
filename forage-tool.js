@@ -496,9 +496,9 @@ const ingredients = {
       },
       rarity: {
         common: "Gyakori",
-        uncommon: "Nem gyakori",
+        uncommon: "Szokatlan",
         rare: "Ritka",
-        very_rare: "Nagyon ritka"
+        very_rare: "Rendkívüli"
       },
       type: {
         acidic: "Savas",
