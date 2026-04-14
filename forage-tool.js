@@ -342,7 +342,8 @@ const ingredients = {
         type: "Type",
         confirm: "Forage",
         language: "Language",
-        nothingFound: "Did not find anything."
+        nothingFound: "Did not find anything.",
+        outputPlaceholder: "Results will appear here..."
       }
     },
     hu: {
@@ -543,7 +544,8 @@ const ingredients = {
         type: "Típus",
         confirm: "Gyűjtögetés",
         language: "Nyelv",
-        nothingFound: "Nem találtál semmit."
+        nothingFound: "Nem találtál semmit.",
+        outputPlaceholder: "A találatok itt fognak megjelenni..."
       }
     }
   };
@@ -1023,6 +1025,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("label-type").textContent = t("ui", "type");
     document.getElementById("submit-btn").textContent = t("ui", "confirm");
     document.getElementById("label-language").textContent = t("ui", "language");
+    output.placeholder = t("ui", "outputPlaceholder");
   }
 
   function fillSelects() {
