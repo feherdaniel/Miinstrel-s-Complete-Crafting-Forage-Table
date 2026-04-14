@@ -12,6 +12,14 @@
       padding: 20px;
     }
 
+    .languageSelector {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+    }
+
     form {
       display: flex;
       flex-direction: column;
@@ -48,50 +56,57 @@
 </head>
 <body>
   <h2>Foraging Results</h2>
+  <div class="languageSelector">
+    <label for="language" id="label-language">Language</label>
+    <select id="language">
+      <option value="en">en</option>
+      <option value="hu">hu</option>
+    </select>
+  </div>
 
   <form id="forageForm">
     <div class="row">
-      <label for="rarity">Rarity</label>
+      <label for="rarity" id="label-rarity">Rarity</label>
       <select id="rarity" name="rarity"></select>
     </div>
 
     <div class="row">
-      <label for="nature">Identify (Intelligence or Wisdom + Nature)</label>
+      <label for="nature" id="label-nature">Identify (Intelligence or Wisdom + Nature)</label>
       <input type="number" id="nature" name="nature" value="0" />
     </div>
 
     <div class="row">
-      <label for="survival">Forage (Strength or Dexterity + Survival)</label>
+      <label for="survival" id="label-survival">Forage (Strength or Dexterity + Survival)</label>
       <input type="number" id="survival" name="survival" value="0" />
     </div>
 
     <div class="row">
-      <label for="badWeather">Bad Weather (increases DC by 2)</label>
+      <label for="badWeather" id="label-badWeather">Bad Weather (increases DC by 2)</label>
       <input type="checkbox" id="badWeather" name="badWeather" style="flex: 0;" />
     </div>
 
     <div class="row">
-      <label for="hostileArea">Hostile Area (increases DC by 2)</label>
+      <label for="hostileArea" id="label-hostileArea">Hostile Area (increases DC by 2)</label>
       <input type="checkbox" id="hostileArea" name="hostileArea" style="flex: 0;" />
     </div>
 
     <div class="row">
-      <label for="nat20">Type-based random no-roll</label>
+      <label for="nat20" id="label-nat20">Type-based random no-roll</label>
       <input type="checkbox" id="nat20" name="nat20" style="flex: 0;" />
     </div>
 
     <div class="row" id="rollWrap">
-      <label for="roll">D100 Roll</label>
+      <label for="roll" id="label-roll">D100 Roll</label>
       <input type="number" id="roll" name="roll" value="0" />
     </div>
 
     <div class="row" id="nat20TypeWrap" style="display: none;">
-      <label for="nat20Type">Type</label>
+      <label for="nat20Type" id="label-type">Type</label>
       <select id="nat20Type" name="nat20Type"></select>
     </div>
 
     <div class="row">
-      <button type="submit">Confirm</button>
+      <button type="submit" id="submit-btn">Confirm</button>
     </div>
   </form>
 
