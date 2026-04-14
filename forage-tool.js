@@ -1,5 +1,10 @@
 let currentLang = "en";
 
+function getKeyByValue(obj, value) {
+  const entry = Object.entries(obj).find(([_, v]) => v === value);
+  return entry ? entry[0] : null;
+}
+
 const ingredients = {
     amalgamSlagClump: { rarity: "uncommon", type: "acidic", material: "earthenware" },
     gelatinousCubeCore: { rarity: "very_rare", type: "acidic", material: "fluid" },
@@ -554,16 +559,12 @@ function t(section, key) {
   return translations[currentLang][section][key] ?? key;
 }
 
-function tIngredient(id) {
-  return translations[currentLang].ingredients[id] ?? id;
-}
-
 function formatIngredientLocalized(id) {
   const item = ingredients[id];
-  return `${tIngredient(id)} (${translations[currentLang].rarity[item.rarity]} ${translations[currentLang].type[item.type]} ${translations[currentLang].material[item.material]})`;
+  return `${t("ingredients", id)} (${translations[currentLang].rarity[item.rarity]} ${translations[currentLang].type[item.type]} ${translations[currentLang].material[item.material]})`;
 }
 
-function forageResult(rarity, nature, survival, roll, nat20, nat20Type, badWeather, hostileArea, currentLang) {
+function forageResult(rarity, nature, survival, roll, nat20, nat20Type, badWeather, hostileArea) {
   let check;
   let commonQuantity = 0;
   let uncommonQuantity = 0;
@@ -788,7 +789,7 @@ function forageResult(rarity, nature, survival, roll, nat20, nat20Type, badWeath
       }
       break;
 
-    case "very rare":
+    case "very_rare":
       check = 22;
       if (badWeather)
         check += 2;
@@ -999,7 +1000,7 @@ function forageResult(rarity, nature, survival, roll, nat20, nat20Type, badWeath
     results.push(`${veryRareQuantity} x ${formatIngredientLocalized(veryRareItemName)}`);
   }
 
-  return results.length ? results.join("\n") : "Did not find anything.";
+  return results.length ? results.join("\n") : t("ui", "nothingFound");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1069,7 +1070,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const rarity = raritySelect.value;
+    const rarity = getKeyByValue(translations[currentLang].rarity, raritySelect.value);
     const nature = parseInt(document.getElementById("nature").value, 10) || 0;
     const survival = parseInt(document.getElementById("survival").value, 10) || 0;
     const roll = nat20Checkbox.checked ? 0 : (parseInt(document.getElementById("roll").value, 10) || 0);
@@ -1078,7 +1079,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const badWeather = badWeatherCheckbox.checked;
     const hostileArea = hostileAreaCheckbox.checked;
     
-
     const result = forageResult(rarity, nature, survival, roll, nat20, nat20Type, badWeather, hostileArea, currentLang);
     output.value = result;
   });
